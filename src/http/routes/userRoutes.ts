@@ -8,5 +8,13 @@ export async function userRoutes(app: FastifyInstance) {
     const { statusCode, body } = await controller.handle({request, reply});
 
     return reply.status(statusCode).send(body);
+  });
+
+  app.get("/api/users/verify", async (request, reply) => {
+    const controller = UserFactory.buildVerifyUserTokenController();
+
+    const { statusCode, body } = await controller.handle({ request, reply });
+
+    return reply.status(statusCode).send(body);
   })
 }
