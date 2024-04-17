@@ -8,7 +8,10 @@ export class PostgresCreateUserRepository implements IRepository<IUserCreationSc
   
   async execute(props: IUserCreationSchema): Promise<Either<object, null>> {
     const newUser = await database.user.create({
-      data: props,
+      data: {
+        name: props.name,
+        email: props.email,
+      },
     });
 
     return { id: newUser.id }

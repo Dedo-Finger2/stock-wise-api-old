@@ -1,4 +1,4 @@
-import { PostgresCreateUserRepository } from "./CreateUser";
+import { PostgresCreateUserRepository } from "./CreateUserRepository";
 
 it("should create a new user", async () => {
   const repository = new PostgresCreateUserRepository();

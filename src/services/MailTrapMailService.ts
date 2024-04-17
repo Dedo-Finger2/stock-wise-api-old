@@ -4,7 +4,9 @@ import nodemailer from "nodemailer";
 import { IMailService, IMessage } from "../interfaces/IEmailService";
 
 export class MailTrapMailService implements IMailService {
-  constructor( private transporter: Mail ) {
+  private transporter: Mail
+
+  constructor() {
     this.transporter = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,

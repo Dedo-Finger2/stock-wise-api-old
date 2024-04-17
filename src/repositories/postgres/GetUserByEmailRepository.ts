@@ -2,7 +2,7 @@ import { IRepository } from "../../interfaces/IRepository";
 import { IUserReturnSchema } from "../../interfaces/IUser";
 import { Either } from "../../utils/types";
 
-import { database } from "./../../config/database";
+import { database } from "../../config/database";
 
 export class PostgresGetUserByEmailRepository implements IRepository<string, IUserReturnSchema> {
 
