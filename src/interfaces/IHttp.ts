@@ -1,4 +1,4 @@
-export interface ResponseSchema {
+export interface IResponseSchema {
   statusCode: number;
   body: object;
 };
