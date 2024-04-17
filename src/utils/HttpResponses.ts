@@ -1,4 +1,4 @@
-import { ResponseSchema } from "./../interfaces/http";
+import { ResponseSchema } from "../interfaces/IHttp";
 
 export class HttpResponse {
   static _200(body = { message: "Success." }): ResponseSchema {
