@@ -12,7 +12,6 @@ it("should send an email to the user.", async () => {
   const userParams = {
     name: "Greg",
     email: "teste2@teste.com",
-    token: "123",
   };
 
   const response = await loginUserUseCase.execute(userParams);

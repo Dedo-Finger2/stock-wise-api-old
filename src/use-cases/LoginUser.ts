@@ -21,7 +21,7 @@ export class LoginUser implements IUseCase<IUserCreationSchema, IMessageReturn> 
   async execute(props: IUserCreationSchema): Promise<Either<IMessageReturn, null>> {
     const user: Either<IUserReturnSchema, null> = await this.getUserByEmailRepository.execute(props.email);
 
-    let token = app.jwt.sign(
+    let token = app.jwt?.sign(
       { userId: user?.id },
       { expiresIn: "1h" },
     );
@@ -29,7 +29,7 @@ export class LoginUser implements IUseCase<IUserCreationSchema, IMessageReturn> 
     if (!user) {
       const newUser: Either<IRepositoryReturnId, null> = await this.createUserRepository.execute(props);
 
-      token = app.jwt.sign(
+      token = app.jwt?.sign(
         { userId: newUser?.id },
         { expiresIn: "1h" },
       );
