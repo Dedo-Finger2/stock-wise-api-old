@@ -1,14 +1,10 @@
 import { IMailService } from "../interfaces/IEmailService";
 import { IRepository } from "../interfaces/IRepository";
-import { IUseCase } from "../interfaces/IUseCase";
+import { IMessageReturn, IUseCase } from "../interfaces/IUseCase";
 import { IUserCreationSchema, IUserReturnSchema } from "../interfaces/IUser";
 import { Either } from "../utils/types";
 
-interface ILoginUseCaseReturn {
-  message: string,
-};
-
-export class LoginUser implements IUseCase<IUserCreationSchema, ILoginUseCaseReturn> {
+export class LoginUser implements IUseCase<IUserCreationSchema, IMessageReturn> {
 
   constructor(
     private createUserRepository: IRepository<IUserCreationSchema, object>,
@@ -20,7 +16,7 @@ export class LoginUser implements IUseCase<IUserCreationSchema, ILoginUseCaseRet
     this.emailService = emailService;
   }
 
-  async execute(props: IUserCreationSchema): Promise<Either<ILoginUseCaseReturn, null>> {
+  async execute(props: IUserCreationSchema): Promise<Either<IMessageReturn, null>> {
     let user: Either<object, null> = await this.getUserByEmailRepository.execute(props.email);
 
     if (!user) {
