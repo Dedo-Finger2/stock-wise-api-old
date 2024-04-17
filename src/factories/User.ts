@@ -1,8 +1,8 @@
-import { LoginUserController } from "../http/controllers/index";
+import { LoginUserController, VerifyUserTokenController } from "../http/controllers/index";
 
-import { PostgresCreateUserRepository, PostgresGetUserByEmailRepository } from "../repositories/index";
+import { PostgresCreateUserRepository, PostgresGetUserByEmailRepository, PostgresGetUserByIdRepository } from "../repositories/index";
 
-import { LoginUser } from "../use-cases";
+import { LoginUser, GetUserByIdUseCase } from "../use-cases";
 
 import { MailTrapMailService } from "./../services/index";
 
@@ -20,4 +20,14 @@ export class UserFactory {
     
     return loginUserController;
   }
+
+  static buildVerifyUserTokenController() {
+    const getUserByIdRepository = new PostgresGetUserByIdRepository();
+    const getUserByIdUseCase = new GetUserByIdUseCase(getUserByIdRepository);
+
+    const verifyUserTokenController = new VerifyUserTokenController(getUserByIdUseCase);
+
+    return verifyUserTokenController;
+  }
+
 }
