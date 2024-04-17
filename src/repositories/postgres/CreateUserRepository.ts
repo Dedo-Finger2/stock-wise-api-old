@@ -1,12 +1,11 @@
-import { IRepository } from "../../interfaces/IRepository";
+import { IRepository, IRepositoryReturnId } from "../../interfaces/IRepository";
 import { IUserCreationSchema } from "../../interfaces/IUser";
-import { Either } from "../../utils/types";
 
 import { database } from "../../config/database";
 
-export class PostgresCreateUserRepository implements IRepository<IUserCreationSchema, object> {
+export class PostgresCreateUserRepository implements IRepository<IUserCreationSchema, IRepositoryReturnId> {
   
-  async execute(props: IUserCreationSchema): Promise<Either<object, null>> {
+  async execute(props: IUserCreationSchema): Promise<IRepositoryReturnId> {
     const newUser = await database.user.create({
       data: {
         name: props.name,

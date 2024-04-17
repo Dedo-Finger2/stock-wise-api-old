@@ -1,3 +1,4 @@
+import { FastifyReply, FastifyRequest } from "fastify";
 import { Either } from "../utils/types";
 
 export interface IControllerReturn {
@@ -5,6 +6,11 @@ export interface IControllerReturn {
   body: object,
 };
 
-export interface IController<params, IControllerReturn> {
-  handle(props: Either<params, null>): Promise<IControllerReturn>;
+export interface IControllerParams {
+  request: FastifyRequest,
+  reply: FastifyReply,
+};
+
+export interface IController<IControllerParams, IControllerReturn> {
+  handle(props: IControllerParams): Promise<IControllerReturn>;
 }

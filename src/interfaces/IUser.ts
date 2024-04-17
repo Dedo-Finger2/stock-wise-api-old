@@ -3,7 +3,6 @@ import { Either } from "../utils/types";
 export interface IUserCreationSchema {
   name: string,
   email: string,
-  token?: string,
 };
 
 export interface IUserReturnSchema {
