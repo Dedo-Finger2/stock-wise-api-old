@@ -3,6 +3,8 @@ import { IUseCase } from "../interfaces/IUseCase";
 import { IUserReturnSchema } from "../interfaces/IUser";
 import { Either } from "../utils/types";
 
+import { UserNotFoundError } from "./../errors/UserErrors";
+
 export class GetUserByIdUseCase implements IUseCase<string, IUserReturnSchema> {
   constructor(
     private getUserByIdRepository: IRepository<string, IUserReturnSchema>
@@ -14,7 +16,7 @@ export class GetUserByIdUseCase implements IUseCase<string, IUserReturnSchema> {
     const user = await this.getUserByIdRepository.execute(id);
 
     if (!user) {
-      throw new Error("User not found.");
+      throw new UserNotFoundError();
     };
 
     return user;
