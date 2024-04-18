@@ -1,8 +1,8 @@
-import { LoginUserController, VerifyUserTokenController } from "../http/controllers/index";
+import { LoginUserController, VerifyUserTokenController, DeleteAccountController } from "../http/controllers/index";
 
-import { PostgresCreateUserRepository, PostgresGetUserByEmailRepository, PostgresGetUserByIdRepository } from "../repositories/index";
+import { PostgresCreateUserRepository, PostgresGetUserByEmailRepository, PostgresGetUserByIdRepository, PostgresDeleteUserRepository } from "../repositories/index";
 
-import { LoginUser, GetUserByIdUseCase } from "../use-cases";
+import { LoginUser, GetUserByIdUseCase, DeleteUserUseCase } from "../use-cases";
 
 import { MailTrapMailService } from "./../services/index";
 
@@ -28,6 +28,17 @@ export class UserFactory {
     const verifyUserTokenController = new VerifyUserTokenController(getUserByIdUseCase);
 
     return verifyUserTokenController;
+  }
+
+  static buildDeleteAccountController() {
+    const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
+    const deleteUserRepository = new PostgresDeleteUserRepository();
+    
+    const deleteUserUseCase = new DeleteUserUseCase(deleteUserRepository, getUserByEmailRepository);
+
+    const deleteAccountController = new DeleteAccountController(deleteUserUseCase);
+
+    return deleteAccountController;
   }
 
 }

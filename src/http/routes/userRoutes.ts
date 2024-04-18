@@ -16,5 +16,14 @@ export async function userRoutes(app: FastifyInstance) {
     const { statusCode, body } = await controller.handle({ request, reply });
 
     return reply.status(statusCode).send(body);
-  })
+  });
+
+  app.delete("/api/users", async(request, reply) => {
+    const controller = UserFactory.buildDeleteAccountController();
+
+    const { statusCode, body } = await controller.handle({ request, reply });
+
+    return reply.status(statusCode).send(body);
+  });
+
 }

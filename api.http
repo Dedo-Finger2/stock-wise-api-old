@@ -5,3 +5,12 @@ Content-Type: application/json
     "name": "Greg",
     "email": "greg@email.com"
 }
+
+###
+
+DELETE http://localhost:3333/api/users
+Content-Type: application/json
+
+{
+    "email": "greg23@email.com"
+}
